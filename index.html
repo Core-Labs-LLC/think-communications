@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-navy': '#1a2b4a',
+                        'brand-blue': '#2563eb',
+                        'brand-light': '#f0f4f8',
+                        'brand-accent': '#3b82f6'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+        
+        .animate-slideInLeft {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-slideInRight {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        .delay-200 { animation-delay: 0.2s; opacity: 0; }
+        .delay-400 { animation-delay: 0.4s; opacity: 0; }
+        .delay-600 { animation-delay: 0.6s; opacity: 0; }
+        .delay-800 { animation-delay: 0.8s; opacity: 0; }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(26, 43, 74, 0.85) 0%, rgba(37, 99, 235, 0.75) 100%);
+        }
+        
+        .bg-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        .bg-slider img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .bg-slider img.active {
+            opacity: 1;
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<header id="header" class="fixed w-full z-50 transition-all duration-300">
+    <div class="container mx-auto px-8">
+        <div class="flex justify-between items-center py-6">
+            <div class="flex items-center">
+                <a href="#" class="flex items-center">
+                    <img src="https://imgur.com/eqWWoMy.png" alt="Think Communications" class="h-20 w-auto">
+                </a>
+            </div>
+            <nav class="hidden lg:flex items-center space-x-10">
+                <a href="#about" class="nav-link text-white font-medium text-base tracking-wide">About</a>
+                <a href="#services" class="nav-link text-white font-medium text-base tracking-wide">Services</a>
+                <a href="#portfolio" class="nav-link text-white font-medium text-base tracking-wide">Portfolio</a>
+                <a href="#team" class="nav-link text-white font-medium text-base tracking-wide">Team</a>
+                <a href="#insights" class="nav-link text-white font-medium text-base tracking-wide">Insights</a>
+                <a href="#contact" class="bg-brand-accent hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">Get Started</a>
+            </nav>
+            <button class="lg:hidden text-white text-2xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<section id="hero-section" class="relative h-[800px] flex items-center justify-center overflow-hidden">
+    <div class="bg-slider">
+        <img class="active w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/aeaeec16ce-a34307d9fda3a0aeb043.png" alt="modern professional business meeting with diverse team collaborating on communications strategy, bright office environment, premium corporate photography" />
+        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/adf764634b-1a37d91e74ebedbce45c.png" alt="creative marketing team brainstorming session with sticky notes and digital screens, contemporary workspace, high-end business photography" />
+        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/c61ccbd3c8-89fe394d85320d55a73f.png" alt="professional public relations event with media coverage and press conference setup, sophisticated corporate setting" />
+    </div>
+    <div class="absolute inset-0 z-10 bg-black/40"></div>
+    <div class="relative z-20 container mx-auto px-8 text-center">
+        <h1 class="text-7xl font-bold text-white mb-6 animate-fadeInUp leading-tight">Strategic Communications<br/>That Tell Your Story</h1>
+        <p class="text-2xl text-white/90 mb-10 max-w-3xl mx-auto animate-fadeInUp delay-200 font-light">Elevate your brand with expert public relations, compelling content, and strategic media relations that connect with your audience</p>
+        <div class="flex gap-6 justify-center animate-fadeInUp delay-400">
+            <a href="#services" class="bg-white text-brand-navy font-semibold px-10 py-4 rounded-full hover:bg-brand-light transition-all duration-300 shadow-2xl hover:shadow-3xl text-lg">Explore Our Services</a>
+            <a href="#contact" class="border-2 border-white text-white font-semibold px-10 py-4 rounded-full hover:bg-white hover:text-brand-navy transition-all duration-300 text-lg">Let's Connect</a>
+        </div>
+    </div>
+</section>
+
+<section id="about" class="py-32 bg-white">
+    <div class="container mx-auto px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="animate-slideInLeft">
+                <span class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-4 block">About Think Communications</span>
+                <h2 class="text-5xl font-bold text-brand-navy mb-8 leading-tight">Your Strategic Partner in Communications Excellence</h2>
+                <p class="text-gray-600 text-lg mb-6 leading-relaxed">Think Communications is a full-service public relations and marketing communications firm dedicated to helping organizations craft compelling narratives and connect with their target audiences through strategic planning and creative execution.</p>
+                <p class="text-gray-600 text-lg mb-6 leading-relaxed">With expertise spanning media relations, content development, strategic communications planning, and project management, we transform complex messages into clear, engaging stories that resonate.</p>
+                <p class="text-gray-600 text-lg mb-8 leading-relaxed">Our approach combines strategic thinking with creative storytelling, ensuring every communication touchpoint strengthens your brand and advances your organizational goals.</p>
+                <div class="grid grid-cols-3 gap-8 mb-8">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-brand-accent mb-2">15+</div>
+                        <div class="text-gray-600 text-sm">Years Experience</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-brand-accent mb-2">200+</div>
+                        <div class="text-gray-600 text-sm">Clients Served</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-brand-accent mb-2">500+</div>
+                        <div class="text-gray-600 text-sm">Projects Delivered</div>
+                    </div>
+                </div>
+                <a href="#contact" class="inline-block bg-brand-navy text-white font-semibold px-8 py-4 rounded-full hover:bg-brand-accent transition-all duration-300 shadow-lg">Partner With Us</a>
+            </div>
+            <div class="animate-slideInRight">
+                <div class="relative">
+                    <div class="absolute -top-6 -left-6 w-72 h-72 bg-brand-accent/10 rounded-3xl"></div>
+                    <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-brand-navy/10 rounded-3xl"></div>
+                    <img class="relative rounded-3xl shadow-2xl w-full h-auto object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6577176cbb-7bb49dcd12f9546f8f60.png" alt="professional communications team working together in modern office, diverse group reviewing media strategy, premium corporate photography" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="py-32 bg-gradient-to-br from-brand-light to-white">
+    <div class="container mx-auto px-8">
+        <div class="text-center mb-20">
+            <span class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-4 block">Our Expertise</span>
+            <h2 class="text-5xl font-bold text-brand-navy mb-6">Comprehensive Communications Services</h2>
+            <p class="text-gray-600 text-xl max-w-3xl mx-auto">From strategic planning to creative execution, we deliver integrated communications solutions that drive results</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
+            <div class="service-card bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl">
+                <div class="w-16 h-16 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-bullhorn text-3xl text-brand-accent"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-navy mb-4">Public Relations</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">Build and protect your reputation with strategic media relations, crisis communications, and thought leadership positioning that elevates your brand visibility.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Media Relations & Press Releases</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Crisis Communications</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Thought Leadership</span>
+                    </li>
+                </ul>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Learn More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+            
+            <div class="service-card bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl">
+                <div class="w-16 h-16 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-pen-fancy text-3xl text-brand-accent"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-navy mb-4">Content Development</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">Engage your audience with compelling, strategic content that tells your story across all channels and drives meaningful connections.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Copywriting & Editing</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Blog & Article Creation</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Social Media Content</span>
+                    </li>
+                </ul>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Learn More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+            
+            <div class="service-card bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl">
+                <div class="w-16 h-16 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-chess text-3xl text-brand-accent"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-navy mb-4">Strategic Planning</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">Develop comprehensive communications strategies aligned with your business objectives and designed to achieve measurable results.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Communications Strategy</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Brand Positioning</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Audience Analysis</span>
+                    </li>
+                </ul>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Learn More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+            
+            <div class="service-card bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl">
+                <div class="w-16 h-16 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-newspaper text-3xl text-brand-accent"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-navy mb-4">Media Relations</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">Cultivate strong relationships with media outlets and secure strategic coverage that amplifies your message and reaches key audiences.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Media Outreach & Pitching</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Press Kit Development</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Interview Preparation</span>
+                    </li>
+                </ul>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Learn More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+            
+            <div class="service-card bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl">
+                <div class="w-16 h-16 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-tasks text-3xl text-brand-accent"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-navy mb-4">Project Management</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">Execute complex communications initiatives with precision through expert project coordination and stakeholder management.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Campaign Coordination</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Timeline Management</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Budget Oversight</span>
+                    </li>
+                </ul>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Learn More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+            
+            <div class="service-card bg-white rounded-2xl p-10 shadow-lg hover:shadow-2xl">
+                <div class="w-16 h-16 bg-brand-accent/10 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fa-solid fa-chart-line text-3xl text-brand-accent"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-navy mb-4">Digital Marketing</h3>
+                <p class="text-gray-600 mb-6 leading-relaxed">Amplify your reach and engagement through integrated digital strategies that connect with audiences across channels.</p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Social Media Strategy</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Email Marketing</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-check text-brand-accent mt-1 mr-3"></i>
+                        <span class="text-gray-600">Analytics & Reporting</span>
+                    </li>
+                </ul>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Learn More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="highlight-section-1" class="relative h-[600px] flex items-center justify-center overflow-hidden">
+    <img class="absolute inset-0 w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/56439c0ece-8f69f35be750b230da7f.png" alt="professional speaker presenting at corporate communications conference, modern auditorium setting, premium business photography" />
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-navy/90 to-brand-accent/80"></div>
+    <div class="relative z-10 container mx-auto px-8 text-center">
+        <h2 class="text-6xl font-bold text-white mb-8 animate-fadeInUp">Transforming Ideas Into Impact</h2>
+        <p class="text-2xl text-white/90 mb-10 max-w-4xl mx-auto animate-fadeInUp delay-200 leading-relaxed">We craft strategic narratives that resonate with your audience, drive engagement, and deliver measurable business outcomes</p>
+        <a href="#portfolio" class="inline-block bg-white text-brand-navy font-semibold px-10 py-4 rounded-full hover:bg-brand-light transition-all duration-300 shadow-2xl animate-fadeInUp delay-400 text-lg">View Our Work</a>
+    </div>
+</section>
+
+<section id="portfolio" class="py-32 bg-white">
+    <div class="container mx-auto px-8">
+        <div class="text-center mb-20">
+            <span class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-4 block">Success Stories</span>
+            <h2 class="text-5xl font-bold text-brand-navy mb-6">Recent Projects & Case Studies</h2>
+            <p class="text-gray-600 text-xl max-w-3xl mx-auto">Explore how we've helped organizations achieve their communications goals through strategic planning and creative execution</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden rounded-2xl mb-6 shadow-lg">
+                    <img class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/5cbc6acdbc-11607c6f211d5807679c.png" alt="successful product launch event with media coverage and press attendees, modern corporate setting" />
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-brand-accent/10 text-brand-accent px-4 py-1 rounded-full text-sm font-semibold">Product Launch</span>
+                    <span class="text-gray-500 text-sm">Technology Sector</span>
+                </div>
+                <h3 class="text-3xl font-bold text-brand-navy mb-4 group-hover:text-brand-accent transition-colors">Tech Innovation Product Launch</h3>
+                <p class="text-gray-600 text-lg mb-6 leading-relaxed">Orchestrated a comprehensive launch campaign that secured coverage in 50+ media outlets, generated 2M+ impressions, and drove 300% increase in brand awareness.</p>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">View Case Study <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+            
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden rounded-2xl mb-6 shadow-lg">
+                    <img class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/6dee2aae65-be0f6474e250916892b7.png" alt="nonprofit community outreach event with volunteers and beneficiaries, heartwarming atmosphere" />
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-brand-accent/10 text-brand-accent px-4 py-1 rounded-full text-sm font-semibold">Brand Campaign</span>
+                    <span class="text-gray-500 text-sm">Nonprofit Sector</span>
+                </div>
+                <h3 class="text-3xl font-bold text-brand-navy mb-4 group-hover:text-brand-accent transition-colors">Nonprofit Awareness Campaign</h3>
+                <p class="text-gray-600 text-lg mb-6 leading-relaxed">Developed an integrated communications strategy that increased donations by 150%, expanded volunteer base by 200%, and elevated organizational profile.</p>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">View Case Study <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+            
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden rounded-2xl mb-6 shadow-lg">
+                    <img class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/a27663e94f-f45d83ffc8c918859fca.png" alt="corporate crisis management team meeting in boardroom, professional business setting" />
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-brand-accent/10 text-brand-accent px-4 py-1 rounded-full text-sm font-semibold">Crisis Management</span>
+                    <span class="text-gray-500 text-sm">Healthcare Sector</span>
+                </div>
+                <h3 class="text-3xl font-bold text-brand-navy mb-4 group-hover:text-brand-accent transition-colors">Healthcare Crisis Response</h3>
+                <p class="text-gray-600 text-lg mb-6 leading-relaxed">Managed sensitive crisis communications that protected reputation, maintained stakeholder trust, and restored public confidence within 30 days.</p>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">View Case Study <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+            
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden rounded-2xl mb-6 shadow-lg">
+                    <img class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/c173f4cd69-988d7c038c072808c912.png" alt="executive thought leader speaking at industry conference, professional presentation setting" />
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="bg-brand-accent/10 text-brand-accent px-4 py-1 rounded-full text-sm font-semibold">Thought Leadership</span>
+                    <span class="text-gray-500 text-sm">Financial Services</span>
+                </div>
+                <h3 class="text-3xl font-bold text-brand-navy mb-4 group-hover:text-brand-accent transition-colors">Executive Positioning Program</h3>
+                <p class="text-gray-600 text-lg mb-6 leading-relaxed">Established CEO as industry thought leader through strategic content placement, speaking opportunities, and media relations, resulting in 10+ tier-1 features.</p>
+                <a href="#contact" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">View Case Study <i class="fa-solid fa-arrow-right ml-2"></i></a>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="#contact" class="inline-block bg-brand-navy text-white font-semibold px-10 py-4 rounded-full hover:bg-brand-accent transition-all duration-300 shadow-lg text-lg">Request Full Portfolio</a>
+        </div>
+    </div>
+</section>
+
+<section id="team" class="py-32 bg-gradient-to-br from-brand-light to-white">
+    <div class="container mx-auto px-8">
+        <div class="text-center mb-20">
+            <span class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-4 block">Our Team</span>
+            <h2 class="text-5xl font-bold text-brand-navy mb-6">Expert Communications Professionals</h2>
+            <p class="text-gray-600 text-xl max-w-3xl mx-auto">Meet the strategic minds and creative talents behind Think Communications</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center">
+                <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Team Member" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">Sarah Mitchell</h3>
+                <p class="text-brand-accent font-semibold mb-4">Founder & CEO</p>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Strategic communications leader with 20+ years experience in PR and brand development</p>
+                <div class="flex justify-center gap-4">
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center">
+                <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Team Member" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">Michael Chen</h3>
+                <p class="text-brand-accent font-semibold mb-4">Director of Media Relations</p>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Award-winning journalist turned PR strategist specializing in media placement and crisis communications</p>
+                <div class="flex justify-center gap-4">
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center">
+                <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Team Member" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">Emily Rodriguez</h3>
+                <p class="text-brand-accent font-semibold mb-4">Content Strategy Lead</p>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Creative storyteller with expertise in content marketing, copywriting, and brand narrative development</p>
+                <div class="flex justify-center gap-4">
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 text-center">
+                <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg" alt="Team Member" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">David Thompson</h3>
+                <p class="text-brand-accent font-semibold mb-4">Digital Strategy Director</p>
+                <p class="text-gray-600 mb-6 text-sm leading-relaxed">Digital marketing expert focused on social media strategy, analytics, and integrated campaigns</p>
+                <div class="flex justify-center gap-4">
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-linkedin text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-brand-accent transition-colors"><i class="fa-brands fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-12 shadow-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-3xl font-bold text-brand-navy mb-6">Join Our Growing Team</h3>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">We're always looking for talented communications professionals who are passionate about strategic storytelling and client success.</p>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">If you're ready to make an impact and work with diverse clients across industries, we'd love to hear from you.</p>
+                    <a href="#contact" class="inline-block bg-brand-accent text-white font-semibold px-8 py-4 rounded-full hover:bg-brand-navy transition-all duration-300 shadow-lg">View Open Positions</a>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-brand-light rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-brand-accent mb-2">25+</div>
+                        <div class="text-gray-600 font-medium">Team Members</div>
+                    </div>
+                    <div class="bg-brand-light rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-brand-accent mb-2">12</div>
+                        <div class="text-gray-600 font-medium">Industries Served</div>
+                    </div>
+                    <div class="bg-brand-light rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-brand-accent mb-2">98%</div>
+                        <div class="text-gray-600 font-medium">Client Satisfaction</div>
+                    </div>
+                    <div class="bg-brand-light rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-brand-accent mb-2">5</div>
+                        <div class="text-gray-600 font-medium">Industry Awards</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials" class="py-32 bg-white">
+    <div class="container mx-auto px-8">
+        <div class="text-center mb-20">
+            <span class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-4 block">Client Testimonials</span>
+            <h2 class="text-5xl font-bold text-brand-navy mb-6">What Our Clients Say</h2>
+            <p class="text-gray-600 text-xl max-w-3xl mx-auto">Don't just take our word for it—hear from the organizations we've helped achieve their communications goals</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div class="testimonial-card bg-gradient-to-br from-brand-light to-white rounded-2xl p-10 shadow-lg">
+                <div class="flex items-center mb-6">
+                    <i class="fa-solid fa-star text-yellow-400 text-xl"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                </div>
+                <p class="text-gray-700 text-lg mb-8 leading-relaxed italic">"Think Communications transformed our brand story and helped us secure coverage in major media outlets. Their strategic approach and creativity exceeded all expectations."</p>
+                <div class="flex items-center">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Client" class="w-14 h-14 rounded-full mr-4">
+                    <div>
+                        <div class="font-bold text-brand-navy">James Patterson</div>
+                        <div class="text-gray-500 text-sm">CEO, TechVenture Inc.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card bg-gradient-to-br from-brand-light to-white rounded-2xl p-10 shadow-lg">
+                <div class="flex items-center mb-6">
+                    <i class="fa-solid fa-star text-yellow-400 text-xl"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                </div>
+                <p class="text-gray-700 text-lg mb-8 leading-relaxed italic">"Working with Think Communications was a game-changer for our nonprofit. They helped us amplify our mission and connect with supporters in meaningful ways."</p>
+                <div class="flex items-center">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Client" class="w-14 h-14 rounded-full mr-4">
+                    <div>
+                        <div class="font-bold text-brand-navy">Maria Santos</div>
+                        <div class="text-gray-500 text-sm">Executive Director, Community Hope</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card bg-gradient-to-br from-brand-light to-white rounded-2xl p-10 shadow-lg">
+                <div class="flex items-center mb-6">
+                    <i class="fa-solid fa-star text-yellow-400 text-xl"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                    <i class="fa-solid fa-star text-yellow-400 text-xl ml-1"></i>
+                </div>
+                <p class="text-gray-700 text-lg mb-8 leading-relaxed italic">"Their crisis communications expertise saved our reputation during a challenging time. Professional, responsive, and incredibly strategic—highly recommend!"</p>
+                <div class="flex items-center">
+                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Client" class="w-14 h-14 rounded-full mr-4">
+                    <div>
+                        <div class="font-bold text-brand-navy">Robert Chang</div>
+                        <div class="text-gray-500 text-sm">VP Communications, HealthFirst</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="insights" class="py-32 bg-gradient-to-br from-brand-light to-white">
+    <div class="container mx-auto px-8">
+        <div class="text-center mb-20">
+            <span class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-4 block">Latest Insights</span>
+            <h2 class="text-5xl font-bold text-brand-navy mb-6">Communications Trends & Best Practices</h2>
+            <p class="text-gray-600 text-xl max-w-3xl mx-auto">Stay informed with expert perspectives on the evolving communications landscape</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
+            <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                <div class="h-64 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/31e19d19f2-e6057e78ddc391f26f4a.png" alt="modern digital PR strategy with social media analytics dashboard, professional workspace" />
+                </div>
+                <div class="p-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-brand-accent/10 text-brand-accent px-3 py-1 rounded-full text-xs font-semibold">PR Strategy</span>
+                        <span class="text-gray-400 text-sm">5 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-navy mb-4 hover:text-brand-accent transition-colors cursor-pointer">The Future of Public Relations in 2025</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">Explore emerging trends shaping the PR landscape, from AI-powered media monitoring to authentic storytelling in the digital age.</p>
+                    <a href="#" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Read More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                <div class="h-64 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/54664141db-464b7ce78036df98bfd3.png" alt="crisis management team analyzing media coverage, urgent business meeting atmosphere" />
+                </div>
+                <div class="p-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-brand-accent/10 text-brand-accent px-3 py-1 rounded-full text-xs font-semibold">Crisis Comms</span>
+                        <span class="text-gray-400 text-sm">7 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-navy mb-4 hover:text-brand-accent transition-colors cursor-pointer">Crisis Communications: A Proactive Approach</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">Learn essential strategies for preparing your organization to respond effectively when challenges arise and protect your reputation.</p>
+                    <a href="#" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Read More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                </div>
+            </article>
+            
+            <article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                <div class="h-64 overflow-hidden">
+                    <img class="w-full h-full object-cover hover:scale-110 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d7e42c4417-1924912e5f16ec8c5098.png" alt="content creator writing engaging brand story, creative workspace with laptop and notes" />
+                </div>
+                <div class="p-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="bg-brand-accent/10 text-brand-accent px-3 py-1 rounded-full text-xs font-semibold">Content Marketing</span>
+                        <span class="text-gray-400 text-sm">6 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-brand-navy mb-4 hover:text-brand-accent transition-colors cursor-pointer">Crafting Compelling Brand Narratives</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">Discover proven techniques for developing authentic brand stories that resonate with audiences and drive meaningful engagement.</p>
+                    <a href="#" class="text-brand-accent font-semibold hover:text-brand-navy transition-colors">Read More <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                </div>
+            </article>
+        </div>
+        
+        <div class="text-center">
+            <a href="#" class="inline-block bg-brand-navy text-white font-semibold px-10 py-4 rounded-full hover:bg-brand-accent transition-all duration-300 shadow-lg text-lg">View All Articles</a>
+        </div>
+    </div>
+</section>
+
+<section id="highlight-section-2" class="relative h-[600px] flex items-center justify-center overflow-hidden">
+    <img class="absolute inset-0 w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/22e9698c9d-747b6aae5f64ca45ed58.png" alt="diverse team collaborating on communications strategy around conference table, modern bright office" />
+    <div class="absolute inset-0 bg-gradient-to-l from-brand-accent/90 to-brand-navy/85"></div>
+    <div class="relative z-10 container mx-auto px-8">
+        <div class="max-w-3xl">
+            <h2 class="text-6xl font-bold text-white mb-8 animate-fadeInUp">Ready to Elevate Your Communications?</h2>
+            <p class="text-2xl text-white/90 mb-10 leading-relaxed animate-fadeInUp delay-200">Let's discuss how we can help you achieve your communications goals and connect with your target audiences more effectively.</p>
+            <div class="flex gap-6 animate-fadeInUp delay-400">
+                <a href="#contact" class="bg-white text-brand-navy font-semibold px-10 py-4 rounded-full hover:bg-brand-light transition-all duration-300 shadow-2xl text-lg">Start a Conversation</a>
+                <a href="#services" class="border-2 border-white text-white font-semibold px-10 py-4 rounded-full hover:bg-white hover:text-brand-navy transition-all duration-300 text-lg">Our Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="process" class="py-32 bg-white">
+    <div class="container mx-auto px-8">
+        <div class="text-center mb-20">
+            <span class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-4 block">Our Approach</span>
+            <h2 class="text-5xl font-bold text-brand-navy mb-6">How We Work With Clients</h2>
+            <p class="text-gray-600 text-xl max-w-3xl mx-auto">A proven methodology that delivers strategic communications solutions tailored to your unique needs</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="relative">
+                <div class="bg-brand-accent/10 rounded-2xl p-8 h-full">
+                    <div class="w-16 h-16 bg-brand-accent rounded-xl flex items-center justify-center mb-6 text-white text-2xl font-bold">1</div>
+                    <h3 class="text-2xl font-bold text-brand-navy mb-4">Discovery</h3>
+                    <p class="text-gray-600 leading-relaxed">We dive deep into understanding your organization, goals, challenges, and target audiences through comprehensive research and stakeholder interviews.</p>
+                </div>
+                <div class="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                    <i class="fa-solid fa-arrow-right text-brand-accent text-3xl"></i>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div class="bg-brand-accent/10 rounded-2xl p-8 h-full">
+                    <div class="w-16 h-16 bg-brand-accent rounded-xl flex items-center justify-center mb-6 text-white text-2xl font-bold">2</div>
+                    <h3 class="text-2xl font-bold text-brand-navy mb-4">Strategy</h3>
+                    <p class="text-gray-600 leading-relaxed">We develop a customized communications strategy aligned with your business objectives, complete with clear messaging, tactics, and success metrics.</p>
+                </div>
+                <div class="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                    <i class="fa-solid fa-arrow-right text-brand-accent text-3xl"></i>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div class="bg-brand-accent/10 rounded-2xl p-8 h-full">
+                    <div class="w-16 h-16 bg-brand-accent rounded-xl flex items-center justify-center mb-6 text-white text-2xl font-bold">3</div>
+                    <h3 class="text-2xl font-bold text-brand-navy mb-4">Execution</h3>
+                    <p class="text-gray-600 leading-relaxed">Our team brings the strategy to life through expert content creation, media outreach, campaign management, and coordinated implementation.</p>
+                </div>
+                <div class="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                    <i class="fa-solid fa-arrow-right text-brand-accent text-3xl"></i>
+                </div>
+            </div>
+            
+            <div>
+                <div class="bg-brand-accent/10 rounded-2xl p-8 h-full">
+                    <div class="w-16 h-16 bg-brand-accent rounded-xl flex items-center justify-center mb-6 text-white text-2xl font-bold">4</div>
+                    <h3 class="text-2xl font-bold text-brand-navy mb-4">Measurement</h3>
+                    <p class="text-gray-600 leading-relaxed">We track performance against KPIs, provide detailed reporting, and continuously optimize our approach to maximize results and ROI.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="py-32 bg-gradient-to-br from-brand-light to-white">
+    <div class="container mx-auto px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+            <div>
+                <span class="text-brand-accent font-semibold text-sm uppercase tracking-wider mb-4 block">Get In Touch</span>
+                <h2 class="text-5xl font-bold text-brand-navy mb-8 leading-tight">Let's Start a Conversation</h2>
+                <p class="text-gray-600 text-lg mb-10 leading-relaxed">Ready to transform your communications strategy? Whether you need help with a specific project or want to discuss long-term partnership opportunities, we're here to help.</p>
+                
+                <div class="space-y-8 mb-12">
+                    <div class="flex items-start">
+                        <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
+                            <i class="fa-solid fa-location-dot text-brand-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-navy mb-2 text-lg">Office Location</h4>
+                            <p class="text-gray-600">123 Communications Boulevard<br/>Phoenix, AZ 85001</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
+                            <i class="fa-solid fa-envelope text-brand-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-navy mb-2 text-lg">Email Us</h4>
+                            <a href="mailto:info@thinkcommaz.com" class="text-brand-accent hover:text-brand-navy transition-colors">info@thinkcommaz.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-14 h-14 bg-brand-accent/10 rounded-xl flex items-center justify-center mr-6 flex-shrink-0">
+                            <i class="fa-solid fa-clock text-brand-accent text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-brand-navy mb-2 text-lg">Business Hours</h4>
+                            <p class="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM<br/>Saturday - Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-brand-navy mb-4 text-lg">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 bg-brand-navy hover:bg-brand-accent rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <i class="fa-brands fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-brand-navy hover:bg-brand-accent rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <i class="fa-brands fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-brand-navy hover:bg-brand-accent rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <i class="fa-brands fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-brand-navy hover:bg-brand-accent rounded-full flex items-center justify-center text-white transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <i class="fa-brands fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-3xl shadow-2xl p-10">
+                <h3 class="text-3xl font-bold text-brand-navy mb-8">Send Us a Message</h3>
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-brand-navy font-semibold mb-2">First Name</label>
+                            <input type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-accent focus:outline-none transition-colors" placeholder="John">
+                        </div>
+                        <div>
+                            <label class="block text-brand-navy font-semibold mb-2">Last Name</label>
+                            <input type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-accent focus:outline-none transition-colors" placeholder="Doe">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-brand-navy font-semibold mb-2">Email Address</label>
+                        <input type="email" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-accent focus:outline-none transition-colors" placeholder="john@company.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-brand-navy font-semibold mb-2">Organization</label>
+                        <input type="text" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-accent focus:outline-none transition-colors" placeholder="Your Company Name">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-brand-navy font-semibold mb-2">Service Interest</label>
+                        <select class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-accent focus:outline-none transition-colors">
+                            <option>Select a service</option>
+                            <option>Public Relations</option>
+                            <option>Content Development</option>
+                            <option>Strategic Planning</option>
+                            <option>Media Relations</option>
+                            <option>Project Management</option>
+                            <option>Digital Marketing</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-brand-navy font-semibold mb-2">Message</label>
+                        <textarea rows="5" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-accent focus:outline-none transition-colors resize-none" placeholder="Tell us about your project or communications needs..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-brand-accent hover:bg-brand-navy text-white font-semibold py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl text-lg">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="footer" class="bg-brand-navy text-white py-16">
+    <div class="container mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div>
+                <img src="https://imgur.com/eqWWoMy.png" alt="Think Communications" class="h-16 w-auto mb-6">
+                <p class="text-white/80 mb-6 leading-relaxed">Strategic communications that connect, engage, and inspire action.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-brand-accent rounded-full flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-brand-accent rounded-full flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-brand-accent rounded-full flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 hover:bg-brand-accent rounded-full flex items-center justify-center transition-all duration-300">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-lg mb-6">Services</h4>
+                <ul class="space-y-3">
+                    <li><a href="#services" class="text-white/80 hover:text-brand-accent transition-colors">Public Relations</a></li>
+                    <li><a href="#services" class="text-white/80 hover:text-brand-accent transition-colors">Content Development</a></li>
+                    <li><a href="#services" class="text-white/80 hover:text-brand-accent transition-colors">Strategic Planning</a></li>
+                    <li><a href="#services" class="text-white/80 hover:text-brand-accent transition-colors">Media Relations</a></li>
+                    <li><a href="#services" class="text-white/80 hover:text-brand-accent transition-colors">Project Management</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-lg mb-6">Company</h4>
+                <ul class="space-y-3">
+                    <li><a href="#about" class="text-white/80 hover:text-brand-accent transition-colors">About Us</a></li>
+                    <li><a href="#team" class="text-white/80 hover:text-brand-accent transition-colors">Our Team</a></li>
+                    <li><a href="#portfolio" class="text-white/80 hover:text-brand-accent transition-colors">Portfolio</a></li>
+                    <li><a href="#insights" class="text-white/80 hover:text-brand-accent transition-colors">Insights</a></li>
+                    <li><a href="#contact" class="text-white/80 hover:text-brand-accent transition-colors">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-lg mb-6">Newsletter</h4>
+                <p class="text-white/80 mb-4">Stay updated with communications insights and industry trends.</p>
+                <form class="space-y-3">
+                    <input type="email" placeholder="Your email address" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-brand-accent transition-colors">
+                    <button type="submit" class="w-full bg-brand-accent hover:bg-white hover:text-brand-navy text-white font-semibold py-3 rounded-lg transition-all duration-300">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="border-t border-white/20 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/60 text-sm">© 2025 Think Communications. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="text-white/60 hover:text-brand-accent text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/60 hover:text-brand-accent text-sm transition-colors">Terms of Service</a>
+                    <a href="#" class="text-white/60 hover:text-brand-accent text-sm transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+window.addEventListener('load', function() {
+    const bgSlider = document.querySelector('.bg-slider');
+    const images = bgSlider.querySelectorAll('img');
+    let currentIndex = 0;
+    
+    function nextSlide() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+    }
+    
+    setInterval(nextSlide, 5000);
+    
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            header.style.backgroundColor = 'rgba(26, 43, 74, 0.95)';
+            header.style.backdropFilter = 'blur(10px)';
+            header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.backgroundColor = 'transparent';
+            header.style.backdropFilter = 'none';
+            header.style.boxShadow = 'none';
+        }
+    });
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
